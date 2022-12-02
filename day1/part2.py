@@ -1,25 +1,35 @@
+import os 
 
-def run(filename):
+
+def local_file(filename):
+    return os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)
+
+
+def collect_line_groups(filename, parser=lambda x: x):
     with open(filename) as f:
-        elf_total = 0
-        top3 = []
+        group = []
         for line in f.readlines():
             if line.strip() == '':
-                top3 = adjust_top3(top3, elf_total)
-                elf_total = 0
+                yield group
+                group = []
             else:
-                val = int(line)
-                elf_total += val
-        top3 = adjust_top3(top3, elf_total)
-        return sum(top3)
+                group.append(parser(line.strip()))
+        if len(group) > 0:
+            yield group
+    return
 
 
-def adjust_top3(top3, elf_total):
-    top3.append(elf_total)
-    top3.sort()
-    return top3[-3:]
+def run(filename):
+    top3 = []
+    for elf in collect_line_groups(filename, int):
+        elf_total = sum(elf)
+        top3.append(elf_total)
+        top3.sort()
+        top3 = top3[-3:]
+
+    return sum(top3)
 
 
-assert run('day1/example.txt') == 45000
+assert run(local_file('example.txt')) == 45000
 
-print(run('day1/input.txt'))
+print(run(local_file('input.txt')))

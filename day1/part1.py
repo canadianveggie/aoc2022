@@ -1,3 +1,9 @@
+import os
+
+
+def local_file(filename):
+    return os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)
+
 
 def run(filename):
     with open(filename) as f:
@@ -15,6 +21,6 @@ def run(filename):
         return max_total
 
 
-assert run('day1/example.txt') == 24000
+assert run(local_file('example.txt')) == 24000
 
-print(run('day1/input.txt'))
+print(run(local_file('input.txt')))

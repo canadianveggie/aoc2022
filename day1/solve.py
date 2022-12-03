@@ -1,4 +1,4 @@
-import os 
+import os
 
 
 def local_file(filename):
@@ -19,7 +19,18 @@ def collect_line_groups(filename, parser=lambda x: x):
     return
 
 
-def run(filename):
+def part1(filename):
+    with open(filename) as f:
+        max_total = 0
+        
+        for elf in collect_line_groups(filename, int):
+            elf_total = sum(elf)
+            max_total = max(max_total, elf_total)
+
+        return max_total
+
+
+def part2(filename):
     top3 = []
     for elf in collect_line_groups(filename, int):
         elf_total = sum(elf)
@@ -30,6 +41,8 @@ def run(filename):
     return sum(top3)
 
 
-assert run(local_file('example.txt')) == 45000
+assert part1(local_file('example.txt')) == 24000
+print(part1(local_file('input.txt')))
 
-print(run(local_file('input.txt')))
+assert part2(local_file('example.txt')) == 45000
+print(part2(local_file('input.txt')))

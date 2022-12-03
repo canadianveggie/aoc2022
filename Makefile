@@ -1,11 +1,8 @@
 days := $(wildcard *.c)
 
-day%: day%/part1.py day%/part2.py ;
+day%: day%/solve.py ;
 
-day%/part1.py: FORCE
-	poetry run python $@
-
-day%/part2.py: FORCE
+day%/solve.py: FORCE
 	poetry run python $@
 
 FORCE: ;

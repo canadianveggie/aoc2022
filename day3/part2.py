@@ -19,12 +19,9 @@ def collect_pack_items(filename):
 
 
 def priority(letter):
-    ordinal = ord(letter)
-    if ordinal > 96:
-        # a-z
-        return ordinal - 96
-    # A-Z
-    return ordinal - 64 + 26
+    if letter.islower():
+        return ord(letter) - ord('a') + 1
+    return ord(letter) - ord('A') + 1 + 26
 
 
 assert priority('a') == 1
@@ -36,7 +33,7 @@ assert priority('Z') == 52
 def run(filename):
     total = 0
     for group in collect_pack_items(filename):
-        common = set([x for x in group[0] if x in group[1] and x in group[2]])
+        common = set(group[0]) & set(group[1]) & set(group[2])
         for x in common:
             total += priority(x)
     return total

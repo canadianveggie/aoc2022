@@ -12,7 +12,7 @@ def parse_input(filename):
         crates = []
         moves = []
         for line in f.readlines():
-            if line.startswith (' 1'):
+            if line.startswith(' 1'):
                 crate_def = False
             elif crate_def:
                 letters = [x for x in line]
@@ -23,7 +23,7 @@ def parse_input(filename):
                     if box[1] != ' ':
                         crates[i].insert(0, box[1])
                     i += 1
-            elif line.startswith('move'): # moves
+            elif line.startswith('move'):  # moves
                 re_match = re.match('move (\\d+) from (\\d+) to (\\d+)', line).groups()
                 moves.append([int(x) for x in re_match])
 
@@ -44,9 +44,8 @@ def part2(filename):
     crates, moves = parse_input(filename)
 
     for (count, from_i, to_i) in moves:
-        stack = crates[from_i - 1][-1 * count:]
-        for i in range(count):
-            crates[from_i - 1].pop()
+        stack = [crates[from_i - 1].pop() for x in range(count)]
+        stack.reverse()
         crates[to_i - 1].extend(stack)
 
     return ''.join([crate[-1] for crate in crates])

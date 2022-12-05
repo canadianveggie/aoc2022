@@ -26,7 +26,7 @@ def part1(filename):
 
 
 def overlap(elf1, elf2):
-    return (elf1[0] >= elf2[0] and elf1[0] <= elf2[1]) or (elf1[1] >= elf2[0] and elf1[1] <= elf2[1])
+    return elf2[0] <= elf1[0] <= elf2[1] or elf2[0] <= elf1[1] <= elf2[1]
 
 
 def part2(filename):

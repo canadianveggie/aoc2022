@@ -6,10 +6,10 @@ def local_file(filename):
 
 
 def find_signal(text, size):
-    i = 0
-    while i < len(text) - size:
-        if len(set(text[i: i + size])) == size:
-            return i + size
+    i = size
+    while i < len(text):
+        if len(set(text[i - size: i])) == size:
+            return i
         i += 1
 
 

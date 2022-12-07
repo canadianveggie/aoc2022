@@ -6,11 +6,9 @@ def local_file(filename):
 
 
 def find_signal(text, size):
-    i = size
-    while i < len(text):
+    for i in range(4, len(text)):
         if len(set(text[i - size: i])) == size:
             return i
-        i += 1
 
 
 def part1(text):

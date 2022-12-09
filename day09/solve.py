@@ -1,5 +1,4 @@
 import os
-from collections import defaultdict
 
 
 def local_file(filename):
@@ -63,17 +62,15 @@ def part2(filename):
     moves = parse_input(filename)
     visited = set()
 
-    head = (0, 0)
-    knots = [(0, 0)]*9
+    knots = [(0, 0)] * 10
 
     visited.add(knots[-1])
 
     for direction, spaces in moves:
         for i in range(spaces):
-            head = adjust_head(head, direction)
-            for i in range(len(knots)):
-                prev = knots[i-1] if i > 0 else head
-                knots[i] = adjust_tail(prev, knots[i])
+            knots[0] = adjust_head(knots[0], direction)
+            for i in range(1, len(knots)):
+                knots[i] = adjust_tail(knots[i-1], knots[i])
             visited.add(knots[-1])
 
     return len(visited)

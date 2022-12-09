@@ -27,7 +27,10 @@ def adjust_tail(head, tail):
     delta_x = head[0] - tail[0]
     delta_y = head[1] - tail[1]
 
+    # head has to be at least 2 spaces away in 1 dimension to provide space for tail to move
     if abs(delta_x) >= 2 or abs(delta_y) >= 2:
+        # move up to 1 space in each direction if that gets us closer
+        # lack of sign function in python is annoying here
         if delta_x <= -1:
             tail = (tail[0] - 1, tail[1])
         elif delta_x >= 1:

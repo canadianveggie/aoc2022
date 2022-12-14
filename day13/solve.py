@@ -12,7 +12,8 @@ def parse_input(filename):
         while True:
             left = f.readline()
             right = f.readline()
-            blank = f.readline()
+            # skip blank
+            f.readline()
 
             if left and right:
                 yield (json.loads(left), json.loads(right))

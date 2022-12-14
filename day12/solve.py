@@ -69,9 +69,10 @@ def part2(filename):
         try:
             shortest_path = nx.shortest_path(graph, p_start, end)
             min_distance = min(min_distance, len(shortest_path) - 1)
-        except:
+        except Exception:
             pass
     return min_distance
+
 
 assert part1(local_file('example.txt')) == 31
 print(part1(local_file('input.txt')))
@@ -79,5 +80,4 @@ print(part1(local_file('input.txt')))
 
 assert part2(local_file('example.txt')) == 29
 print(part2(local_file('input.txt')))
-
 
